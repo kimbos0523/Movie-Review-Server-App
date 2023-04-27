@@ -20,6 +20,7 @@ const AuthController = (app) => {
     const user = await usersDao.findUserByCredentials(username, password);
     if (user) {
       req.session['currentUser'] = user;
+      console.log('logged in success');
       res.json(user);
     } else {
       res.sendStatus(404);
@@ -29,9 +30,11 @@ const AuthController = (app) => {
   const profile = async (req, res) => {
     const currentUser = req.session['currentUser'];
     if (!currentUser) {
+      console.log('profile: fail');
       res.sendStatus(404);
       return;
     }
+    console.log('profile: success');
     res.json(currentUser);
   };
 

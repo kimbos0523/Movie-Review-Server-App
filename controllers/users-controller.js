@@ -2,7 +2,6 @@ import usersModel from '../users/users-model.js';
 
 const createUser = async (req, res) => {
   const newUser = req.body;
-  console.log(newUser);
   const insertedUser = await usersModel.create(newUser);
   res.json(insertedUser);
 };
@@ -29,7 +28,7 @@ const updateUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   const userIdToDelete = req.params.uid;
-  const status = await usersModel.deleteOne(userIdToDelete);
+  const status = await usersModel.deleteOne({ _id: userIdToDelete });
   res.json(status);
 };
 
