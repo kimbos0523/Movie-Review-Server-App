@@ -24,8 +24,12 @@ const usersSchema = new mongoose.Schema(
     role: {
       type: String,
       default: 'user',
-      enum: ['admin', 'user', 'guest', 'moderator'],
+      enum: ['admin', 'user', 'guest'],
     },
+    // favorites: {
+    //   type: [String],
+    //   default: [],
+    // },
   },
   { collection: 'users' }
 );

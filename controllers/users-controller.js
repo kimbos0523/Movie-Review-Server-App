@@ -16,6 +16,13 @@ const findUsersByUserId = async (req, res) => {
   res.json(user);
 };
 
+const findUsersByUserName = async (req, res) => {
+  const users = await usersModel.find({
+    username: { $regex: req.params.username, $options: 'i' },
+  });
+  res.json(users);
+};
+
 const updateUser = async (req, res) => {
   const userIdToUpdate = req.params.uid;
   const updates = req.body;
@@ -38,4 +45,5 @@ export default (app) => {
   app.get('/api/users/:uid', findUsersByUserId);
   app.put('/api/users/:uid', updateUser);
   app.delete('/api/users/:uid', deleteUser);
+  app.get('/api/users/username/:username', findUsersByUserName);
 };
